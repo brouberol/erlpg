@@ -13,6 +13,7 @@ dicetype_to_int() ->
     }.
 
 
+%% Map integer values to their associated dicetype value
 int_to_dicetype() -> utils:map_reversed(dicetype_to_int()).
 
 
@@ -34,6 +35,7 @@ roll(DiceType, NumRolls, Mod) when NumRolls >= 0 ->
     lists:sum(roll(DiceType, NumRolls)) + Mod.
 
 
+%% Roll a dice and return whether the obtained value was higher
+%% or equal than the target value
 test(DiceType, Target) when Target >= 0 ->
     roll(DiceType) =< Target.
-
