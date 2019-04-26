@@ -3,13 +3,6 @@
 -include("records.hrl").
 
 
-dicetype(Weapon) ->
-    case Weapon#weapon.damage of
-        4 -> d4;
-        6 -> d6;
-        8 -> d8;
-        10 -> d10;
-        12 -> d12;
-        20 -> d20
-    end.
+%% Return the dicetype (eg d4, d6, etc) of the argument weapon
+dicetype(Weapon) -> maps:get(Weapon#weapon.damage, dice:int_to_dicetype()).
 
