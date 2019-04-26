@@ -1,11 +1,12 @@
 -module(character).
--export([new/2, new/3, equip_weapon/3, take_damage/2, attack_melee/3]).
+-export([new/3, new/4, equip_weapon/3, take_damage/2, attack_melee/3]).
 -include("records.hrl").
 
 
-new(Race, Class, Stats) ->
+new(Name, Race, Class, Stats) ->
     RACE_STATS = apply_race_stats_modifiers(Race, Stats),
     #character{
+       name = Name,
        race = Race,
        class = Class,
        level = 1,
@@ -16,7 +17,7 @@ new(Race, Class, Stats) ->
        left_weapon = #weapon{name="fist", family="hand", damage=4},
        stats = RACE_STATS}.
 
-new(Race, Class) -> new(Race, Class, stats:new()).
+new(Name, Race, Class) -> new(Name, Race, Class, stats:new()).
 
 
 pv(Class, Stats) ->

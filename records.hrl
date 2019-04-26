@@ -1,4 +1,5 @@
--record(character, {race,
+-record(character, {name,
+                    race,
                     class,
                     level,
                     pv,
