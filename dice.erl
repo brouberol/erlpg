@@ -12,6 +12,7 @@ dicetype_to_int() ->
      d20 => 20
     }.
 
+
 int_to_dicetype() -> utils:map_reversed(dicetype_to_int()).
 
 
