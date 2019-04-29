@@ -1,25 +1,46 @@
 -module(dice).
--export([roll/1, roll/2, roll/3, test/2, dicetype_to_int/0, int_to_dicetype/0]).
+-export([roll/1, roll/2, roll/3, test/2, dicetype_to_int/1, int_to_dicetype/1]).
 
 
-dicetype_to_int() ->
-    #{
-     d4 => 4,
-     d6 => 6,
-     d8 => 8,
-     d10 => 10,
-     d12 => 12,
-     d20 => 20
-    }.
+dicetype_to_int(DiceType)
+    when
+        DiceType == d4;
+        DiceType ==d6;
+        DiceType == d8;
+        DiceType == d10;
+        DiceType == d12;
+        DiceType == d20
+    ->
+    list_to_integer(
+        string:trim(
+            atom_to_list(DiceType),
+            leading,
+            "d"
+        )
+    ).
 
 
-%% Map integer values to their associated dicetype value
-int_to_dicetype() -> utils:map_reversed(dicetype_to_int()).
+%% Map integer value to their associated dicetype value
+int_to_dicetype(Int)
+    when
+        Int == 4;
+        Int ==6;
+        Int == 8;
+        Int == 10;
+        Int == 12;
+        Int == 20
+    ->
+    list_to_atom(
+        string:concat(
+            "d",
+            integer_to_list(Int)
+        )
+    ).
 
 
 %% Roll a d4/6/8/10/12/20
 roll(DiceType) ->
-    rand:uniform(maps:get(DiceType, dicetype_to_int())).
+    rand:uniform(dicetype_to_int(DiceType)).
 
 
 %% Roll a d4/6/8/10/12/20 n times
